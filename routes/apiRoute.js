@@ -16,6 +16,14 @@ module.exports = function(app){
         })
     });
 
+    app.delete("/api/notes/:id", function(req, res){
+        notes.splice(req.params.id, 1);
+        createID();
+        fs.writeFile("./db/db.json", JSON.stringify(notes), function(err){
+            if (err) throw err;
+        });
+    });
+
     function createID(){
         let i = 0;
         notes.forEach(note => {
