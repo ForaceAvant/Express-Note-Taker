@@ -3,8 +3,19 @@ const fs = require("fs");
 
 module.exports = function(app){
     app.get("/api/notes", function(req, res){
-        res.json(notes);
+        fs.readFile("./db/db.json", (err, data)=>{
+            if (err) throw err;
+            return res.json(notes);
+        });
     });
+
+    app.get("/api/notes/:id", function(req,res){
+        fs.readFile("./db/db.json", (err,data) => {
+            if (err) throw err;
+            return res.json(notes);
+        }
+        )
+    })
 
     app.post("/api/notes", function(req,res){
         const note = req.body;
@@ -17,15 +28,15 @@ module.exports = function(app){
     });
 
     app.delete("/api/notes/:id", function(req, res){
-        notes.splice(req.params.id, 1);
+        notes.splice(req.params.id - 1, 1);
         createID();
-        fs.writeFile("./db/db.json", JSON.stringify(notes), function(err){
+        fs.writeFileSync("./db/db.json", JSON.stringify(notes), function(err){
             if (err) throw err;
         });
     });
 
     function createID(){
-        let i = 0;
+        let i = 1;
         notes.forEach(note => {
             note.id = i;
             i++;
