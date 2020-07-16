@@ -1,5 +1,5 @@
 ---
-permalink: /public
+permalink: https://foraceavant.github.io/Express-Note-Taker/public
 ---
 # Express Note Taker created by ForaceAvant
 
