@@ -1,5 +1,5 @@
 ---
-permalink: /public/index.html
+permalink: /public
 ---
 # Express Note Taker created by ForaceAvant
 
